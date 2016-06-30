@@ -22,3 +22,8 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+### Code ###
+# Visual Studio Code - https://code.visualstudio.com/
+.settings/
+.vscode/
