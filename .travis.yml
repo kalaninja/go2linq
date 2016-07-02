@@ -1,0 +1,17 @@
+sudo: false
+
+language: go
+go:
+  - 1.6.2
+  - tip
+
+install:
+  - go get -u golang.org/x/tools/cmd/vet
+  - go get -u github.com/golang/lint/golint
+  - go get -u github.com/ahmetalpbalkan/go-linq
+  
+script:
+  - test -z "$(gofmt -s -l -w ./... | tee /dev/stderr)"
+  - test -z "$(golint ./... | tee /dev/stderr)"
+  - go vet -v ./...
+  - go test -v  ./...
