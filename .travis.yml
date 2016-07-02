@@ -6,9 +6,8 @@ go:
   - tip
 
 install:
-  - go get -u golang.org/x/tools/cmd/vet
   - go get -u github.com/golang/lint/golint
-  - go get -u github.com/ahmetalpbalkan/go-linq
+  - go get -t -u ./...
   
 script:
   - test -z "$(gofmt -s -l -w ./... | tee /dev/stderr)"
