@@ -5,12 +5,16 @@ go:
   - 1.6.2
   - tip
 
-install:
+before_install:
+  - go get github.com/mattn/goveralls
+  - go get golang.org/x/tools/cmd/cover
   - go get -u github.com/golang/lint/golint
-  - go get -t -u ./...
   
 script:
-  - test -z "$(gofmt -s -l -w ./... | tee /dev/stderr)"
-  - test -z "$(golint ./... | tee /dev/stderr)"
-  - go vet -v ./...
+  - go vet -x ./...
+  - golint ./...
   - go test -v  ./...
+  - go test -covermode=count -coverprofile=profile.cov
+
+after_script:
+  - goveralls -coverprofile=profile.cov -service=travis-ci
