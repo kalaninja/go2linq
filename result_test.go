@@ -17,11 +17,11 @@ func TestAll(t *testing.T) {
 	})
 
 	if !r1 {
-		t.Errorf("From(%v).All()=%v", r1)
+		t.Errorf("From(%v).All()=%v", input, r1)
 	}
 
 	if r2 {
-		t.Errorf("From(%v).All()=%v", r2)
+		t.Errorf("From(%v).All()=%v", input, r2)
 	}
 }
 
