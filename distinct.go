@@ -50,6 +50,9 @@ func (oq OrderedQuery) Distinct() OrderedQuery {
 	}
 }
 
+// DistinctBy method returns distinct elements from a collection. This method
+// executes selector function for each element to determine a value to compare.
+// The result is an unordered collection that contains no duplicate values.
 func (q Query) DistinctBy(selector func(interface{}) interface{}) Query {
 	return Query{
 		Iterate: func() Iterator {

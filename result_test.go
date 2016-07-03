@@ -240,11 +240,11 @@ func TestMin(t *testing.T) {
 	}
 }
 
-func TestRaw(t *testing.T) {
+func TestResults(t *testing.T) {
 	input := []int{1, 2, 3}
 	want := []interface{}{1, 2, 3}
 
-	if r := From(input).Raw(); !reflect.DeepEqual(r, want) {
+	if r := From(input).Results(); !reflect.DeepEqual(r, want) {
 		t.Errorf("From(%v).Raw()=%v expected %v", input, r, want)
 	}
 }

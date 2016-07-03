@@ -25,7 +25,7 @@ func (q Query) Append(item interface{}) Query {
 	}
 }
 
-// Concatenates two collections.
+// Concat concatenates two collections.
 //
 // The Concat method differs from the Union method because the Concat method
 // returns all the original elements in the input sequences.

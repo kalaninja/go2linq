@@ -11,7 +11,7 @@ func TestSelectMany(t *testing.T) {
 		selector func(interface{}) Query
 		output   []interface{}
 	}{
-		{[][]int{[]int{1, 2, 3}, []int{4, 5, 6, 7}}, func(i interface{}) Query {
+		{[][]int{{1, 2, 3}, {4, 5, 6, 7}}, func(i interface{}) Query {
 			return From(i)
 		}, []interface{}{1, 2, 3, 4, 5, 6, 7}},
 		{[]string{"str", "ing"}, func(i interface{}) Query {
@@ -32,7 +32,7 @@ func TestSelectManyIndexed(t *testing.T) {
 		selector func(int, interface{}) Query
 		output   []interface{}
 	}{
-		{[][]int{[]int{1, 2, 3}, []int{4, 5, 6, 7}}, func(i int, x interface{}) Query {
+		{[][]int{{1, 2, 3}, {4, 5, 6, 7}}, func(i int, x interface{}) Query {
 			if i > 0 {
 				return From(x.([]int)[1:])
 			}
@@ -57,7 +57,7 @@ func TestSelectManyBy(t *testing.T) {
 		resultSelector func(interface{}, interface{}) interface{}
 		output         []interface{}
 	}{
-		{[][]int{[]int{1, 2, 3}, []int{4, 5, 6, 7}}, func(i interface{}) Query {
+		{[][]int{{1, 2, 3}, {4, 5, 6, 7}}, func(i interface{}) Query {
 			return From(i)
 		}, func(x interface{}, y interface{}) interface{} {
 			return y.(int) + 1
@@ -83,7 +83,7 @@ func TestSelectManyIndexedBy(t *testing.T) {
 		resultSelector func(interface{}, interface{}) interface{}
 		output         []interface{}
 	}{
-		{[][]int{[]int{1, 2, 3}, []int{4, 5, 6, 7}}, func(i int, x interface{}) Query {
+		{[][]int{{1, 2, 3}, {4, 5, 6, 7}}, func(i int, x interface{}) Query {
 			if i == 0 {
 				return From([]int{10, 20, 30})
 			}

@@ -6,7 +6,7 @@ func ExampleKeyValue() {
 	m := make(map[int]bool)
 	m[10] = true
 
-	fmt.Println(From(m).Raw())
+	fmt.Println(From(m).Results())
 
 	// Output:
 	// [{10 true}]
@@ -14,7 +14,7 @@ func ExampleKeyValue() {
 
 func ExampleKeyValue_second() {
 	input := []KeyValue{
-		KeyValue{10, true},
+		{10, true},
 	}
 
 	m := make(map[int]bool)
@@ -59,7 +59,7 @@ func ExampleQuery_Aggregate() {
 
 func ExampleQuery_Concat() {
 	q := From([]int{1, 2, 3}).Concat(From([]int{4, 5, 6}))
-	fmt.Println(q.Raw())
+	fmt.Println(q.Results())
 
 	// Output:
 	// [1 2 3 4 5 6]
@@ -74,7 +74,7 @@ func ExampleQuery_GroupBy() {
 
 	fmt.Println(q.OrderBy(func(i interface{}) interface{} {
 		return i.(Group).Key
-	}).Raw())
+	}).Results())
 
 	// Output:
 	// [{0 [2 4 6 8]} {1 [1 3 5 7 9]}]
@@ -97,7 +97,7 @@ func ExampleQuery_GroupJoin() {
 			return KeyValue{string(outer.(rune)), inners}
 		})
 
-	fmt.Println(q.Raw())
+	fmt.Println(q.Results())
 
 	// Output:
 	// [{a [apple apricot]} {b [banana]} {c [cherry clementine]}]
@@ -119,7 +119,7 @@ func ExampleQuery_Join() {
 			return KeyValue{outer, inner}
 		})
 
-	fmt.Println(q.Raw())
+	fmt.Println(q.Results())
 
 	// Output:
 	// [{5 apple} {6 banana} {6 cherry} {7 apricot} {10 clementine}]
@@ -132,20 +132,20 @@ func ExampleQuery_OrderBy() {
 		return i
 	})
 
-	fmt.Println(q.Raw())
+	fmt.Println(q.Results())
 
 	// Output:
 	// [10 8 6 4 2 9 7 5 3 1]
 }
 
 func ExampleQuery_SelectMany() {
-	input := [][]int{[]int{1, 2, 3}, []int{4, 5, 6, 7}}
+	input := [][]int{{1, 2, 3}, {4, 5, 6, 7}}
 
 	q := From(input).SelectMany(func(i interface{}) Query {
 		return From(i)
 	})
 
-	fmt.Println(q.Raw())
+	fmt.Println(q.Results())
 
 	// Output:
 	// [1 2 3 4 5 6 7]
@@ -154,7 +154,7 @@ func ExampleQuery_SelectMany() {
 func ExampleQuery_Union() {
 	q := Range(1, 10).Union(Range(6, 10))
 
-	fmt.Println(q.Raw())
+	fmt.Println(q.Results())
 
 	// Output:
 	// [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15]
@@ -168,7 +168,7 @@ func ExampleQuery_Zip() {
 		return []interface{}{a, b}
 	})
 
-	fmt.Println(q.Raw())
+	fmt.Println(q.Results())
 
 	// Output:
 	// [[1 one] [2 two] [3 three]]
@@ -217,4 +217,10 @@ func ExampleQuery_ToSlice() {
 
 	// Output:
 	// [1 2 3 4 5 6 7 8 9 10]
+}
+
+type Book struct {
+	id      int
+	title   string
+	authors []string
 }

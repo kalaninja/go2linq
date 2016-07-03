@@ -203,8 +203,8 @@ func (q Query) Min() (r interface{}) {
 	return
 }
 
-// Raw iterates over a collection and returnes slice of interfaces
-func (q Query) Raw() (r []interface{}) {
+// Results iterates over a collection and returnes slice of interfaces
+func (q Query) Results() (r []interface{}) {
 	next := q.Iterate()
 
 	for item, ok := next(); ok; item, ok = next() {

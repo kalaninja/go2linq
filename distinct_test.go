@@ -44,7 +44,7 @@ func TestDistinctBy(t *testing.T) {
 		name string
 	}
 
-	users := []user{user{1, "Foo"}, user{2, "Bar"}, user{3, "Foo"}}
+	users := []user{{1, "Foo"}, {2, "Bar"}, {3, "Foo"}}
 	want := []interface{}{user{1, "Foo"}, user{2, "Bar"}}
 
 	if q := From(users).DistinctBy(func(u interface{}) interface{} {

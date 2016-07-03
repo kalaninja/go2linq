@@ -21,11 +21,11 @@ type OrderedQuery struct {
 func (q Query) OrderBy(
 	selector func(interface{}) interface{}) OrderedQuery {
 	return OrderedQuery{
-		orders:   []order{order{selector: selector}},
+		orders:   []order{{selector: selector}},
 		original: q,
 		Query: Query{
 			Iterate: func() Iterator {
-				items := q.sort([]order{order{selector: selector}})
+				items := q.sort([]order{{selector: selector}})
 				len := len(items)
 				index := 0
 
@@ -48,11 +48,11 @@ func (q Query) OrderBy(
 func (q Query) OrderByDescending(
 	selector func(interface{}) interface{}) OrderedQuery {
 	return OrderedQuery{
-		orders:   []order{order{selector: selector, desc: true}},
+		orders:   []order{{selector: selector, desc: true}},
 		original: q,
 		Query: Query{
 			Iterate: func() Iterator {
-				items := q.sort([]order{order{selector: selector, desc: true}})
+				items := q.sort([]order{{selector: selector, desc: true}})
 				len := len(items)
 				index := 0
 

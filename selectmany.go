@@ -83,27 +83,27 @@ func (q Query) SelectManyBy(
 	return Query{
 		Iterate: func() Iterator {
 			outernext := q.Iterate()
-			var inner interface{}
+			var outer interface{}
 			var innernext Iterator
 
 			return func() (item interface{}, ok bool) {
 				for !ok {
-					if inner == nil {
-						inner, ok = outernext()
+					if outer == nil {
+						outer, ok = outernext()
 						if !ok {
 							return
 						}
 
-						innernext = selector(inner).Iterate()
+						innernext = selector(outer).Iterate()
 					}
 
 					item, ok = innernext()
 					if !ok {
-						inner = nil
+						outer = nil
 					}
 				}
 
-				item = resultSelector(inner, item)
+				item = resultSelector(outer, item)
 				return
 			}
 		},
@@ -122,28 +122,28 @@ func (q Query) SelectManyByIndexed(selector func(int, interface{}) Query,
 		Iterate: func() Iterator {
 			outernext := q.Iterate()
 			index := 0
-			var inner interface{}
+			var outer interface{}
 			var innernext Iterator
 
 			return func() (item interface{}, ok bool) {
 				for !ok {
-					if inner == nil {
-						inner, ok = outernext()
+					if outer == nil {
+						outer, ok = outernext()
 						if !ok {
 							return
 						}
 
-						innernext = selector(index, inner).Iterate()
+						innernext = selector(index, outer).Iterate()
 						index++
 					}
 
 					item, ok = innernext()
 					if !ok {
-						inner = nil
+						outer = nil
 					}
 				}
 
-				item = resultSelector(inner, item)
+				item = resultSelector(outer, item)
 				return
 			}
 		},
