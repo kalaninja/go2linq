@@ -5,6 +5,7 @@ A powerful language integrated query (LINQ) library for Go.
 * Supports arrays, slices, maps, strings, channels and
 custom collections (collection needs to implement Iterable interface
 and element - Comparable interface)
+* Parallel LINQ (PLINQ) *(comming soon)*
 
 ## Installation
 
@@ -12,7 +13,13 @@ and element - Comparable interface)
 
 ## Quickstart
 
-** Example: ** Find all owners of cars manufactured from 2015
+Usage is as easy as chaining methods like
+
+`From(slice)` `.Where(predicate)` `.Select(selector)` `.Union(data)` 
+
+Just keep writing.
+
+**Example:** Find all owners of cars manufactured from 2015
 ```go
 import . "github.com/kalaninja/go2linq"
 	
@@ -30,7 +37,7 @@ From(cars).Where(func(c interface{}) bool {
 }).ToSlice(&owners)
 ```
 
-** Example: ** Find an author that has written the most books
+**Example:** Find an author that has written the most books
 ```go
 import . "github.com/kalaninja/go2linq"
 	
@@ -53,7 +60,7 @@ author := From(books).SelectMany(func(b interface{}) Query {
 	}).First()
 ```
 
-** More examples ** can be found in [documentation](https://godoc.org/github.com/kalaninja/go2linq)
+**More examples** can be found in [documentation](https://godoc.org/github.com/kalaninja/go2linq)
 
 ## Performance
 
