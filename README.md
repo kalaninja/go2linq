@@ -7,6 +7,12 @@ custom collections (collection needs to implement Iterable interface
 and element - Comparable interface)
 * Parallel LINQ (PLINQ) *(comming soon)*
 
+> :warning: :warning: `go2linq` has been merged into the `go-linq‘s` master branch.
+> Now it is available as the newest version of `go-linq` library (v2.0.0).
+>
+> All further development will be conducted in the new location and this repository will remain only for compatibility reasons.
+> *Please, do not use it anymore!*
+
 ## Installation
 
     $ go get github.com/kalaninja/go2linq
