@@ -11,7 +11,7 @@ and element - Comparable interface)
 > Now it is available as the newest version of `go-linq` library (v2.0.0).
 >
 > All further development will be conducted in the new location and this repository will remain only for compatibility reasons.
-> *Please, do not use it anymore!*
+> **Please, do not use it anymore!**
 
 ## Installation
 
